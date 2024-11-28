@@ -1,5 +1,5 @@
-import './App.css'
 import AppRoutes from './routes/approutes'
+import './index.css';  
 
 function App() {
   return <AppRoutes/>
