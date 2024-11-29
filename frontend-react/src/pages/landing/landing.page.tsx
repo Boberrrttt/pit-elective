@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { landingContent } from "../../content/landing/landing.content"
 
 /**
@@ -14,7 +15,7 @@ const LandingPage = (): JSX.Element => {
             <img src={landingContent.planetGif} className="absolute w-64 bottom-20 left-7 -rotate-90" alt="Planet" />
 
             {/* The star image in the top right corner. */}
-            <img src={landingContent.starGif} className="absolute w-52 top-0 right-20" alt="Star" />
+            <img src={landingContent.asteroidGif} className="absolute w-44 top-0 right-20" alt="Star" />
 
             {/* The main container that contains the title and subtitle. */}
             <div className="bg-black bg-opacity-30 flex items-center justify-center flex-col w-[80%] h-[90%] rounded-[50px] z-30">
@@ -40,14 +41,14 @@ const LandingPage = (): JSX.Element => {
                 </div>
 
                 {/* The button to start predicting. */}
-                <a href="#_" className="relative inline-block text-lg group mt-10">
+                <Link to="/dashboard" className="relative inline-block text-lg group mt-10">
                     <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
                         <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-purple-200"></span>
                         <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:-rotate-180 ease"></span>
                         <span className="relative">Start Predicting</span>
                     </span>
                     <span className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-purple-800 rounded-lg group-hover:mb-0 group-hover:mr-0" data-rounded="rounded-lg"></span>
-                </a>
+                </Link>
             </div>
             
             {/* The astronaut image in the bottom right corner. */}

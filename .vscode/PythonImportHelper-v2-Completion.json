@@ -1,5 +1,55 @@
 [
     {
+        "label": "pickle",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pickle",
+        "description": "pickle",
+        "detail": "pickle",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "StandardScaler",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
         "label": "json",
         "kind": 6,
         "isExtraImport": true,
@@ -22,6 +72,24 @@
         "description": "flatted",
         "isExtraImport": true,
         "detail": "flatted",
+        "documentation": {}
+    },
+    {
+        "label": "hello_world",
+        "kind": 2,
+        "importPath": "backend-flask.app.app",
+        "description": "backend-flask.app.app",
+        "peekOfCode": "def hello_world():\n    return 'Hello, World!'\nif __name__ == '__main__':\n    app.run(port=3000, debug=True)",
+        "detail": "backend-flask.app.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "backend-flask.app.app",
+        "description": "backend-flask.app.app",
+        "peekOfCode": "app = Flask(__name__)\n@app.route('/', methods=['GET'])\ndef hello_world():\n    return 'Hello, World!'\nif __name__ == '__main__':\n    app.run(port=3000, debug=True)",
+        "detail": "backend-flask.app.app",
         "documentation": {}
     },
     {
