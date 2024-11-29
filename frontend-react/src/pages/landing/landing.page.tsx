@@ -27,19 +27,6 @@ const LandingPage = (): JSX.Element => {
                     <span>Maintenance Solutions</span>
                 </h1>
 
-                {/* The student names. */}
-                <div className="text-white text-xl text-center mb-8">
-                    <p className="mb-4">Submitted by:</p>
-                    <p>John Fabian V. Butong</p>
-                    <p>Robert Roy P. Salvo</p>
-                </div>
-
-                {/* The professor's name. */}
-                <div className="text-white text-xl text-center">
-                    <p className="mb-4">Submitted to:</p>
-                    <p>Jodie Rey Fernandez</p>
-                </div>
-
                 {/* The button to start predicting. */}
                 <Link to="/dashboard" className="relative inline-block text-lg group mt-10">
                     <span className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
