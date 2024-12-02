@@ -42,11 +42,103 @@
         "documentation": {}
     },
     {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "seaborn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "seaborn",
+        "description": "seaborn",
+        "detail": "seaborn",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "train_test_split",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
         "label": "StandardScaler",
         "importPath": "sklearn.preprocessing",
         "description": "sklearn.preprocessing",
         "isExtraImport": true,
         "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "LabelEncoder",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "confusion_matrix",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "classification_report",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "accuracy_score",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "SMOTE",
+        "importPath": "imblearn.over_sampling",
+        "description": "imblearn.over_sampling",
+        "isExtraImport": true,
+        "detail": "imblearn.over_sampling",
+        "documentation": {}
+    },
+    {
+        "label": "BalancedRandomForestClassifier",
+        "importPath": "imblearn.ensemble",
+        "description": "imblearn.ensemble",
+        "isExtraImport": true,
+        "detail": "imblearn.ensemble",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
         "documentation": {}
     },
     {
@@ -79,7 +171,25 @@
         "kind": 2,
         "importPath": "backend-flask.app.app",
         "description": "backend-flask.app.app",
-        "peekOfCode": "def hello_world():\n    return 'Hello, World!'\nif __name__ == '__main__':\n    app.run(port=3000, debug=True)",
+        "peekOfCode": "def hello_world():\n    return 'Hello, World!'\n@app.route('/predict', methods=['POST'])\ndef predict():\n    try:\n        # Get the data from the request\n        data = request.get_json()\n        # Ensure that the input JSON contains all the required features\n        if not all(feature in data for feature in feature_columns):\n            return jsonify({'error': 'Missing required features'}), 400",
+        "detail": "backend-flask.app.app",
+        "documentation": {}
+    },
+    {
+        "label": "predict",
+        "kind": 2,
+        "importPath": "backend-flask.app.app",
+        "description": "backend-flask.app.app",
+        "peekOfCode": "def predict():\n    try:\n        # Get the data from the request\n        data = request.get_json()\n        # Ensure that the input JSON contains all the required features\n        if not all(feature in data for feature in feature_columns):\n            return jsonify({'error': 'Missing required features'}), 400\n        # Convert the features into a pandas DataFrame with the correct column names\n        input_df = pd.DataFrame([data], columns=feature_columns)\n        # Scale the features using the same scaler that was used during training",
+        "detail": "backend-flask.app.app",
+        "documentation": {}
+    },
+    {
+        "label": "feature_columns",
+        "kind": 5,
+        "importPath": "backend-flask.app.app",
+        "description": "backend-flask.app.app",
+        "peekOfCode": "feature_columns = ['UDI', 'Air temperature [K]', 'Process temperature [K]', \n                   'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]']\napp = Flask(__name__)\n@app.route('/', methods=['GET'])\ndef hello_world():\n    return 'Hello, World!'\n@app.route('/predict', methods=['POST'])\ndef predict():\n    try:\n        # Get the data from the request",
         "detail": "backend-flask.app.app",
         "documentation": {}
     },
@@ -88,8 +198,143 @@
         "kind": 5,
         "importPath": "backend-flask.app.app",
         "description": "backend-flask.app.app",
-        "peekOfCode": "app = Flask(__name__)\n@app.route('/', methods=['GET'])\ndef hello_world():\n    return 'Hello, World!'\nif __name__ == '__main__':\n    app.run(port=3000, debug=True)",
+        "peekOfCode": "app = Flask(__name__)\n@app.route('/', methods=['GET'])\ndef hello_world():\n    return 'Hello, World!'\n@app.route('/predict', methods=['POST'])\ndef predict():\n    try:\n        # Get the data from the request\n        data = request.get_json()\n        # Ensure that the input JSON contains all the required features",
         "detail": "backend-flask.app.app",
+        "documentation": {}
+    },
+    {
+        "label": "predict_new_data",
+        "kind": 2,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "def predict_new_data(input_data):\n    # Ensure input_data has the same columns as training data\n    input_df = pd.DataFrame([input_data])\n    # Match columns with training data\n    expected_columns = x.columns  # Columns used for training\n    input_df = input_df[expected_columns]  # Reorder columns if necessary\n    # Scale the input using the same scaler\n    scaled_input = scaler.transform(input_df)\n    # Predict using the model\n    prediction = model.predict(scaled_input)",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "csv",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "csv = pd.read_csv('D:\\\\Code\\\\python\\\\ml-practice\\\\data\\\\predictive-maintenance-2\\\\predictive_maintenance.csv')\n# Encode 'Failure Type' into numerical labels\nlabel_encoder = LabelEncoder()\ncsv['Failure Type'] = label_encoder.fit_transform(csv['Failure Type'])\n# Select numeric columns (exclude non-numeric like 'Product ID' and 'Type')\nnumeric_data = csv.select_dtypes(include=['number'])\n# Split features (X) and target (y)\nx = numeric_data.drop(columns=['Target', 'Failure Type'])  # Drop target columns not needed for training\ny = numeric_data['Failure Type']\n# Train-test split",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "label_encoder",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "label_encoder = LabelEncoder()\ncsv['Failure Type'] = label_encoder.fit_transform(csv['Failure Type'])\n# Select numeric columns (exclude non-numeric like 'Product ID' and 'Type')\nnumeric_data = csv.select_dtypes(include=['number'])\n# Split features (X) and target (y)\nx = numeric_data.drop(columns=['Target', 'Failure Type'])  # Drop target columns not needed for training\ny = numeric_data['Failure Type']\n# Train-test split\nx_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)\n# Scale the data using StandardScaler",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "numeric_data",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "numeric_data = csv.select_dtypes(include=['number'])\n# Split features (X) and target (y)\nx = numeric_data.drop(columns=['Target', 'Failure Type'])  # Drop target columns not needed for training\ny = numeric_data['Failure Type']\n# Train-test split\nx_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)\n# Scale the data using StandardScaler\nscaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "x",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "x = numeric_data.drop(columns=['Target', 'Failure Type'])  # Drop target columns not needed for training\ny = numeric_data['Failure Type']\n# Train-test split\nx_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)\n# Scale the data using StandardScaler\nscaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "y",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "y = numeric_data['Failure Type']\n# Train-test split\nx_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)\n# Scale the data using StandardScaler\nscaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "scaler",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "scaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "x_train_scaled",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "x_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)\n# Display results",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "x_test_scaled",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "x_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "smote",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "smote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "model = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")\ncm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "y_pred",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "y_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")\ncm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")\nprint(classification_report(y_test, y_pred, target_names=label_encoder.classes_))\n# Visualize confusion matrix",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "cm",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "cm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")\nprint(classification_report(y_test, y_pred, target_names=label_encoder.classes_))\n# Visualize confusion matrix\nsns.heatmap(cm, annot=True, fmt='d', cmap='Blues', \n            xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)\nplt.title('Confusion Matrix - Gradient Boosting')\nplt.xlabel('Predicted Label')\nplt.ylabel('True Label')",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "input_data",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "input_data = {\n    \"UDI\": 103,\n    \"Air temperature [K]\": 320.0,\n    \"Process temperature [K]\": 400.0,\n    \"Rotational speed [rpm]\": 300,\n    \"Torque [Nm]\": 2.0,\n    \"Tool wear [min]\": 400\n}\npredicted_result = predict_new_data(input_data)\nprint(f\"Prediction for new data: {predicted_result}\")",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "predicted_result",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "predicted_result = predict_new_data(input_data)\nprint(f\"Prediction for new data: {predicted_result}\")",
+        "detail": "backend-flask.app.new",
         "documentation": {}
     },
     {
