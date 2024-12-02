@@ -1,5 +1,6 @@
 import pickle
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import numpy as np
 import pandas as pd
 
@@ -21,6 +22,7 @@ feature_columns = ['UDI', 'Air temperature [K]', 'Process temperature [K]',
                    'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]']
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/', methods=['GET'])
 def hello_world():

@@ -1,52 +1,88 @@
-import { useState } from "react"
-import Navbar from "../../components/navigation/nav"
+import { useState } from "react";
+import Navbar from "../../components/navigation/nav";
+import axios from "axios";
 
 const Dashboard = () => {
-    const [inputs, setInputs] = useState()
+    const [inputValues, setInputValues] = useState({
+        "UDI": 103,
+        "Air temperature [K]": 0,
+        "Process temperature [K]": 0,
+        "Rotational speed [rpm]": 0,
+        "Torque [Nm]": 0,
+        "Tool wear [min]": 0
+    });
 
-    const handlePredict = () => {
+    const [result, setResult] = useState('');
+    const [error, setError] = useState('');
 
-    }
-    
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        // Only convert the value to a number when necessary
+        setInputValues((prevState) => ({ 
+            ...prevState, 
+            [name]: value === "" ? "" : Number(value) 
+        }));
+    };
+
+    const handlePredict = async () => {
+        try {
+            console.log(inputValues);
+            
+            const response = await axios.post('http://127.0.0.1:3000/predict', inputValues);
+            setResult(response.data.prediction);
+            setError('');
+        } catch (err: any) {
+            setError(err.response?.data?.error || 'Something went wrong');
+        }
+    };
+
+    const renderInputField = (inputValue: number, label: string, name: string) => {
+        return (
+            <div className="flex gap-4">
+                <label
+                    htmlFor={name}
+                    className="text-white text-xl font-bold w-52"
+                >
+                    {label}
+                </label>
+                <input
+                    type="text"
+                    id={name}
+                    name={name}
+                    className="h-10 px-2"
+                    value={inputValue === 0 ? '' : inputValue}  // Show empty string if 0
+                    onChange={handleInputChange}
+                />
+            </div>
+        );
+    };
+
     return (
         <div className="w-screen h-screen relative flex items-center justify-center bg-purple-950">
-            <Navbar/>  
+            <Navbar/>
             <div className="flex flex-col justify-center gap-16 mt-16">
                 <h1 className="font-bold text-white text-4xl text-center">INPUT DATA</h1>
-                
+
                 <div className="flex flex-col gap-10 items-center">
-                    <div className="flex gap-4">
-                        <h1 className="text-white text-xl font-bold w-52">Air Temperature [K]</h1>
-                        <input type="text" className="h-10 px-2"/>
-                    </div>
+                    {renderInputField(inputValues["Air temperature [K]"], 'Air temperature [K]', 'Air temperature [K]')}
+                    {renderInputField(inputValues["Process temperature [K]"], 'Process temperature [K]', 'Process temperature [K]')}
+                    {renderInputField(inputValues["Rotational speed [rpm]"], 'Rotational speed [rpm]', 'Rotational speed [rpm]')}
+                    {renderInputField(inputValues["Torque [Nm]"], 'Torque [Nm]', 'Torque [Nm]')}
+                    {renderInputField(inputValues["Tool wear [min]"], 'Tool wear [min]', 'Tool wear [min]')}
 
-                    <div className="flex gap-4 items-center">
-                        <h1 className="text-white text-xl font-bold w-52">Process temperature [K]</h1>
-                        <input type="text" className="h-10 px-2"/>
-                    </div>
-
-                    <div className="flex gap-4 items-center">
-                        <h1 className="text-white text-xl font-bold w-52">Rotational speed [rpm]</h1>
-                        <input type="text" className="h-10 px-2"/>
-                    </div>
-
-                    <div className="flex gap-4 items-center">
-                        <h1 className="text-white text-xl font-bold w-52">Torque [Nm]</h1>
-                        <input type="text" className="h-10 px-2"/>
-                    </div>
-
-                    <div className="flex gap-4 items-center">
-                        <h1 className="text-white text-xl font-bold w-52">Tool wear [min]</h1>
-                        <input type="text" className="h-10 px-2"/>
-                    </div>
-
-                    <button className="bg-white text-black font-bold py-2 px-8 mt-3 rounded">
+                    <button
+                        className="bg-white text-black font-bold py-2 px-8 mt-3 rounded"
+                        onClick={handlePredict}
+                    >
                         Predict
                     </button>
                 </div>
-            </div>
-        </div>   
-    )
-}
 
-export default Dashboard
+                {result && <h2 className="mt-10">Prediction Result: {result}</h2>}
+                {error && <p className="mt-10 text-red-500">{error}</p>}
+            </div>
+        </div>
+    );
+};
+
+export default Dashboard;

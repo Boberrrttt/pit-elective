@@ -33,6 +33,14 @@
         "documentation": {}
     },
     {
+        "label": "CORS",
+        "importPath": "flask_cors",
+        "description": "flask_cors",
+        "isExtraImport": true,
+        "detail": "flask_cors",
+        "documentation": {}
+    },
+    {
         "label": "numpy",
         "kind": 6,
         "isExtraImport": true,
@@ -189,7 +197,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.app",
         "description": "backend-flask.app.app",
-        "peekOfCode": "feature_columns = ['UDI', 'Air temperature [K]', 'Process temperature [K]', \n                   'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]']\napp = Flask(__name__)\n@app.route('/', methods=['GET'])\ndef hello_world():\n    return 'Hello, World!'\n@app.route('/predict', methods=['POST'])\ndef predict():\n    try:\n        # Get the data from the request",
+        "peekOfCode": "feature_columns = ['UDI', 'Air temperature [K]', 'Process temperature [K]', \n                   'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]']\napp = Flask(__name__)\nCORS(app)\n@app.route('/', methods=['GET'])\ndef hello_world():\n    return 'Hello, World!'\n@app.route('/predict', methods=['POST'])\ndef predict():\n    try:",
         "detail": "backend-flask.app.app",
         "documentation": {}
     },
@@ -198,7 +206,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.app",
         "description": "backend-flask.app.app",
-        "peekOfCode": "app = Flask(__name__)\n@app.route('/', methods=['GET'])\ndef hello_world():\n    return 'Hello, World!'\n@app.route('/predict', methods=['POST'])\ndef predict():\n    try:\n        # Get the data from the request\n        data = request.get_json()\n        # Ensure that the input JSON contains all the required features",
+        "peekOfCode": "app = Flask(__name__)\nCORS(app)\n@app.route('/', methods=['GET'])\ndef hello_world():\n    return 'Hello, World!'\n@app.route('/predict', methods=['POST'])\ndef predict():\n    try:\n        # Get the data from the request\n        data = request.get_json()",
         "detail": "backend-flask.app.app",
         "documentation": {}
     },
