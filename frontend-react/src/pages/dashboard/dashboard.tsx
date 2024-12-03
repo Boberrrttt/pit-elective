@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "../../components/navigation/nav";
 import axios from "axios";
 
 const Dashboard = () => {
@@ -58,9 +57,8 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="w-screen h-screen relative flex items-center justify-center bg-purple-950">
-            <Navbar/>
-            <div className="flex flex-col justify-center gap-16 mt-16">
+        <div className="w-screen h-screen relative flex justify-center overflow-y-scroll bg-purple-950">
+            <div className="flex flex-col  gap-16 mt-20 z-0">
                 <h1 className="font-bold text-white text-4xl text-center">INPUT DATA</h1>
 
                 <div className="flex flex-col gap-10 items-center">
@@ -78,7 +76,15 @@ const Dashboard = () => {
                     </button>
                 </div>
 
-                {result && <h2 className="mt-10">Prediction Result: {result}</h2>}
+                <div className="flex flex-col items-center gap-10">
+                    <h1 className="font-bold text-white text-4xl">PREDICTION RESULT</h1>
+                    <textarea
+                        className="w-96  mb-32 text-black font-bold text-3xl text-center  p-4"
+                        value={result}
+                        readOnly
+                    />
+                </div>
+                
                 {error && <p className="mt-10 text-red-500">{error}</p>}
             </div>
         </div>
