@@ -8,7 +8,6 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 from imblearn.over_sampling import SMOTE
 from imblearn.ensemble import BalancedRandomForestClassifier
-import os
 
 
 # Load dataset
@@ -33,13 +32,10 @@ scaler = StandardScaler()
 x_train_scaled = scaler.fit_transform(x_train)
 x_test_scaled = scaler.transform(x_test)
 
-# Apply SMOTE for oversampling the minority class
-smote = SMOTE(random_state=0)
-x_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)
-
 # Balanced Random Forest
 model = BalancedRandomForestClassifier(random_state=0, n_estimators=200)
-model.fit(x_train_scaled, y_train)
+model.fit(x_train_scaled, y_train)  
+
 y_pred = model.predict(x_test_scaled)
 
 # Display results
@@ -51,14 +47,6 @@ print(cm)
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred, target_names=label_encoder.classes_))
 
-# Visualize confusion matrix
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
-            xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
-plt.title('Confusion Matrix - Gradient Boosting')
-plt.xlabel('Predicted Label')
-plt.ylabel('True Label')
-plt.show()
-
 # Save the model, scaler, and label encoder
 with open('random_forest_model.pkl', 'wb') as model_file:
     pickle.dump(model, model_file)
@@ -69,9 +57,8 @@ with open('scaler.pkl', 'wb') as scaler_file:
 with open('label_encoder.pkl', 'wb') as encoder_file:
     pickle.dump(label_encoder, encoder_file)
 
-# -------------------------------
-# Adding prediction for new inputs:
 
+# Adding prediction for new inputs:
 def predict_new_data(input_data):
     # Ensure input_data has the same columns as training data
     input_df = pd.DataFrame([input_data])
@@ -94,11 +81,11 @@ def predict_new_data(input_data):
 # Example input to predict Heat Dissipation Failure
 input_data = {
     "UDI": 103,
-    "Air temperature [K]": 320.0,
+    "Air temperature [K]": 330.0,
     "Process temperature [K]": 400.0,
     "Rotational speed [rpm]": 300,
-    "Torque [Nm]": 2.0,
-    "Tool wear [min]": 400
+    "Torque [Nm]": 5.0,
+    "Tool wear [min]": 150
 }
 
 

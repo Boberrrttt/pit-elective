@@ -141,15 +141,6 @@
         "documentation": {}
     },
     {
-        "label": "os",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
         "label": "json",
         "kind": 6,
         "isExtraImport": true,
@@ -251,7 +242,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "x = numeric_data.drop(columns=['Target', 'Failure Type'])  # Drop target columns not needed for training\ny = numeric_data['Failure Type']\n# Train-test split\nx_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)\n# Scale the data using StandardScaler\nscaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)",
+        "peekOfCode": "x = numeric_data.drop(columns=['Target', 'Failure Type'])  # Drop target columns not needed for training\ny = numeric_data['Failure Type']\n# Train-test split\nx_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)\n# Scale the data using StandardScaler\nscaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
@@ -260,7 +251,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "y = numeric_data['Failure Type']\n# Train-test split\nx_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)\n# Scale the data using StandardScaler\nscaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)",
+        "peekOfCode": "y = numeric_data['Failure Type']\n# Train-test split\nx_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)\n# Scale the data using StandardScaler\nscaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)  ",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
@@ -269,7 +260,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "scaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)",
+        "peekOfCode": "scaler = StandardScaler()\nx_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)  \ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
@@ -278,7 +269,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "x_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)\n# Display results",
+        "peekOfCode": "x_train_scaled = scaler.fit_transform(x_train)\nx_test_scaled = scaler.transform(x_test)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)  \ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
@@ -287,16 +278,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "x_test_scaled = scaler.transform(x_test)\n# Apply SMOTE for oversampling the minority class\nsmote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")",
-        "detail": "backend-flask.app.new",
-        "documentation": {}
-    },
-    {
-        "label": "smote",
-        "kind": 5,
-        "importPath": "backend-flask.app.new",
-        "description": "backend-flask.app.new",
-        "peekOfCode": "smote = SMOTE(random_state=0)\nx_train_resampled, y_train_resampled = smote.fit_resample(x_train_scaled, y_train)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")",
+        "peekOfCode": "x_test_scaled = scaler.transform(x_test)\n# Balanced Random Forest\nmodel = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)  \ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")\ncm = confusion_matrix(y_test, y_pred)",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
@@ -305,7 +287,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "model = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)\ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")\ncm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")",
+        "peekOfCode": "model = BalancedRandomForestClassifier(random_state=0, n_estimators=200)\nmodel.fit(x_train_scaled, y_train)  \ny_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")\ncm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
@@ -314,7 +296,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "y_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")\ncm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")\nprint(classification_report(y_test, y_pred, target_names=label_encoder.classes_))\n# Visualize confusion matrix",
+        "peekOfCode": "y_pred = model.predict(x_test_scaled)\n# Display results\nprint(f\"\\n=== Training Gradient Boosting ===\")\nprint(f\"Accuracy: {accuracy_score(y_test, y_pred):.4f}\")\nprint(\"Confusion Matrix:\")\ncm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")\nprint(classification_report(y_test, y_pred, target_names=label_encoder.classes_))\n# Save the model, scaler, and label encoder",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
@@ -323,7 +305,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "cm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")\nprint(classification_report(y_test, y_pred, target_names=label_encoder.classes_))\n# Visualize confusion matrix\nsns.heatmap(cm, annot=True, fmt='d', cmap='Blues', \n            xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)\nplt.title('Confusion Matrix - Gradient Boosting')\nplt.xlabel('Predicted Label')\nplt.ylabel('True Label')",
+        "peekOfCode": "cm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")\nprint(classification_report(y_test, y_pred, target_names=label_encoder.classes_))\n# Save the model, scaler, and label encoder\nwith open('random_forest_model.pkl', 'wb') as model_file:\n    pickle.dump(model, model_file)\nwith open('scaler.pkl', 'wb') as scaler_file:\n    pickle.dump(scaler, scaler_file)\nwith open('label_encoder.pkl', 'wb') as encoder_file:",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
@@ -332,7 +314,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "input_data = {\n    \"UDI\": 103,\n    \"Air temperature [K]\": 320.0,\n    \"Process temperature [K]\": 400.0,\n    \"Rotational speed [rpm]\": 300,\n    \"Torque [Nm]\": 2.0,\n    \"Tool wear [min]\": 400\n}\npredicted_result = predict_new_data(input_data)\nprint(f\"Prediction for new data: {predicted_result}\")",
+        "peekOfCode": "input_data = {\n    \"UDI\": 103,\n    \"Air temperature [K]\": 330.0,\n    \"Process temperature [K]\": 400.0,\n    \"Rotational speed [rpm]\": 300,\n    \"Torque [Nm]\": 5.0,\n    \"Tool wear [min]\": 150\n}\npredicted_result = predict_new_data(input_data)\nprint(f\"Prediction for new data: {predicted_result}\")",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
