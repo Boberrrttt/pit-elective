@@ -17,7 +17,7 @@ const DatasetPreview = () => {
     };
 
     return (
-        <div className="h-[90vh] w-[90%] flex flex-col pt-20 items-center">
+        <section className="h-[90vh] w-[90%] flex flex-col pt-20 items-center" id="dataset-preview">
             <h1 className="text-white font-bold text-5xl mb-12">DATASET PREVIEW</h1>
 
             <div className="ag-theme-quartz h-[500px] w-full">
@@ -27,7 +27,7 @@ const DatasetPreview = () => {
                     defaultColDef={defaultColDef}
                 />
             </div>
-        </div>
+        </section>
     );
 };
 

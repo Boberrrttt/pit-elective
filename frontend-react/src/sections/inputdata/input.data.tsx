@@ -3,12 +3,12 @@ import { useState } from "react";
 
 const InputData = () => {
     const [inputValues, setInputValues] = useState({
-        "UDI": 103,
-        "Air temperature [K]": 0,
-        "Process temperature [K]": 0,
-        "Rotational speed [rpm]": 0,
-        "Torque [Nm]": 0,
-        "Tool wear [min]": 0
+        "UDI": 103.0,
+        "Air temperature [K]": 0.0,
+        "Process temperature [K]": 0.0,
+        "Rotational speed [rpm]": 0.0,
+        "Torque [Nm]": 0.0,
+        "Tool wear [min]": 0.0
     });
 
     const [result, setResult] = useState('');
@@ -16,7 +16,6 @@ const InputData = () => {
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        // Only convert the value to a number when necessary
         setInputValues((prevState) => ({ 
             ...prevState, 
             [name]: value === "" ? "" : Number(value) 
@@ -45,7 +44,7 @@ const InputData = () => {
                     {label}
                 </label>
                 <input
-                    type="text"
+                    type="number"
                     id={name}
                     name={name}
                     className="h-10 px-2"
@@ -55,9 +54,20 @@ const InputData = () => {
             </div>
         );
     };
+     
+    const renderResult = () => {
+        if(result){
+            if (result === 'No Failure') {
+                return 'There is no risk of failure for your machine.';
+            } else {
+                return `The likelihood of failure for your machine is ${result}.`;
+            }
+            
+        }
+    }
 
     return (
-        <div className="flex flex-col h-[100vh] gap-16 z-0 pt-20">
+        <section className="flex flex-col h-[100vh] gap-16 z-0 pt-20" id="input-data">
                 <h1 className="font-bold text-white text-5xl text-center">INPUT DATA</h1>
 
                 <div className="flex flex-col gap-10 items-center">
@@ -75,17 +85,17 @@ const InputData = () => {
                     </button>
                 </div>
 
-                <div className="flex flex-col items-center gap-10">
+                <div className="flex flex-col items-center gap-10 w-full">
                     <h1 className="font-bold text-white text-4xl">PREDICTION RESULT</h1>
                     <textarea
-                        className="w-96 mb-32 text-black font-bold text-3xl text-center  p-4"
-                        value={result}
+                        className="w-[600px] mb-32 text-black font-bold text-3xl text-center  p-4"
+                        value={renderResult()}
                         readOnly
                     />
                 </div>
                 
                 {error && <p className="mt-10 text-red-500">{error}</p>}
-            </div> 
+            </section> 
     )
 }
 
