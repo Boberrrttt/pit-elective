@@ -8,6 +8,10 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 from imblearn.over_sampling import SMOTE
 from imblearn.ensemble import BalancedRandomForestClassifier
+import os
+
+# Ensure the directory exists
+os.makedirs('app/models', exist_ok=True)
 
 
 # Load dataset
@@ -48,15 +52,14 @@ print("\nClassification Report:")
 print(classification_report(y_test, y_pred, target_names=label_encoder.classes_))
 
 # Save the model, scaler, and label encoder
-with open('random_forest_model.pkl', 'wb') as model_file:
+with open('app/models/random_forest_model.pkl', 'wb') as model_file:
     pickle.dump(model, model_file)
 
-with open('scaler.pkl', 'wb') as scaler_file:
+with open('app/models/scaler.pkl', 'wb') as scaler_file:
     pickle.dump(scaler, scaler_file)
 
-with open('label_encoder.pkl', 'wb') as encoder_file:
+with open('app/models/label_encoder.pkl', 'wb') as encoder_file:
     pickle.dump(label_encoder, encoder_file)
-
 
 # Adding prediction for new inputs:
 def predict_new_data(input_data):
@@ -88,6 +91,20 @@ input_data = {
     "Tool wear [min]": 150
 }
 
-
 predicted_result = predict_new_data(input_data)
 print(f"Prediction for new data: {predicted_result}")
+
+# Line Graphs for all input features vs Failure Type
+input_features = x.columns
+
+plt.figure(figsize=(15, 10))
+for i, feature in enumerate(input_features):
+    plt.subplot(3, 3, i + 1)
+    sns.lineplot(data=csv, x=feature, y='Failure Type', marker='o')
+    plt.title(f'{feature} vs Failure Type')
+    plt.xlabel(feature)
+    plt.ylabel('Failure Type')
+    plt.grid(True)
+
+plt.tight_layout()
+plt.show()

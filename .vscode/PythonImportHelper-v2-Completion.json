@@ -141,6 +141,15 @@
         "documentation": {}
     },
     {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
         "label": "json",
         "kind": 6,
         "isExtraImport": true,
@@ -305,7 +314,7 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "cm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")\nprint(classification_report(y_test, y_pred, target_names=label_encoder.classes_))\n# Save the model, scaler, and label encoder\nwith open('random_forest_model.pkl', 'wb') as model_file:\n    pickle.dump(model, model_file)\nwith open('scaler.pkl', 'wb') as scaler_file:\n    pickle.dump(scaler, scaler_file)\nwith open('label_encoder.pkl', 'wb') as encoder_file:",
+        "peekOfCode": "cm = confusion_matrix(y_test, y_pred)\nprint(cm)\nprint(\"\\nClassification Report:\")\nprint(classification_report(y_test, y_pred, target_names=label_encoder.classes_))\n# Save the model, scaler, and label encoder\nwith open('app/models/random_forest_model.pkl', 'wb') as model_file:\n    pickle.dump(model, model_file)\nwith open('app/models/scaler.pkl', 'wb') as scaler_file:\n    pickle.dump(scaler, scaler_file)\nwith open('app/models/label_encoder.pkl', 'wb') as encoder_file:",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },
@@ -323,7 +332,16 @@
         "kind": 5,
         "importPath": "backend-flask.app.new",
         "description": "backend-flask.app.new",
-        "peekOfCode": "predicted_result = predict_new_data(input_data)\nprint(f\"Prediction for new data: {predicted_result}\")",
+        "peekOfCode": "predicted_result = predict_new_data(input_data)\nprint(f\"Prediction for new data: {predicted_result}\")\n# Line Graphs for all input features vs Failure Type\ninput_features = x.columns\nplt.figure(figsize=(15, 10))\nfor i, feature in enumerate(input_features):\n    plt.subplot(3, 3, i + 1)\n    sns.lineplot(data=csv, x=feature, y='Failure Type', marker='o')\n    plt.title(f'{feature} vs Failure Type')\n    plt.xlabel(feature)",
+        "detail": "backend-flask.app.new",
+        "documentation": {}
+    },
+    {
+        "label": "input_features",
+        "kind": 5,
+        "importPath": "backend-flask.app.new",
+        "description": "backend-flask.app.new",
+        "peekOfCode": "input_features = x.columns\nplt.figure(figsize=(15, 10))\nfor i, feature in enumerate(input_features):\n    plt.subplot(3, 3, i + 1)\n    sns.lineplot(data=csv, x=feature, y='Failure Type', marker='o')\n    plt.title(f'{feature} vs Failure Type')\n    plt.xlabel(feature)\n    plt.ylabel('Failure Type')\n    plt.grid(True)\nplt.tight_layout()",
         "detail": "backend-flask.app.new",
         "documentation": {}
     },

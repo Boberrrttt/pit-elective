@@ -93,6 +93,7 @@ const InputData = () => {
                         readOnly
                     />
                 </div>
+
                 
                 {error && <p className="mt-10 text-red-500">{error}</p>}
             </section> 
